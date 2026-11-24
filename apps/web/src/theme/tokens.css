@@ -1,0 +1,76 @@
+/*
+  Thème : TOUTE l'identité visuelle est ici (couleurs, espacements, rayons, ombres, typographie).
+  Pour changer de look, modifier ce seul fichier ; les composants n'utilisent que ces variables.
+*/
+:root {
+  /* Couleurs de marque */
+  --c-primary: #2563eb;
+  --c-primary-hover: #1d4ed8;
+  --c-primary-soft: #e6eefe;
+  --c-on-primary: #ffffff;
+  --c-nav: #0e1d3a;
+  --c-nav-hover: #1a2c52;
+  --c-nav-active: #2563eb;
+  --c-nav-text: #c9d4ee;
+  --c-nav-text-strong: #ffffff;
+
+  /* Surfaces et texte */
+  --c-bg: #f3f6fb;
+  --c-surface: #ffffff;
+  --c-surface-muted: #f7f9fc;
+  --c-border: #dbe2ee;
+  --c-border-strong: #b9c4d8;
+  --c-text: #152036;
+  --c-text-muted: #55627d;
+  --c-focus: #f59e0b;
+
+  /* Statuts (jamais la couleur seule : toujours un texte ou une icône avec) */
+  --c-ok: #15803d;
+  --c-ok-soft: #dcfce7;
+  --c-warn: #b45309;
+  --c-warn-soft: #ffedd5;
+  --c-danger: #b91c1c;
+  --c-danger-soft: #fee2e2;
+  --c-info: #1d4ed8;
+  --c-info-soft: #dbeafe;
+  --c-neutral-soft: #e8edf5;
+
+  /* Plein écran de contrôle (très contrasté) */
+  --c-scan-ok: #0f7a35;
+  --c-scan-bad: #b3171f;
+  --c-scan-warn: #c2610c;
+
+  /* Espacements */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+
+  /* Rayons */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+
+  /* Ombres */
+  --shadow-card: 0 1px 2px rgba(14, 29, 58, 0.06), 0 4px 14px rgba(14, 29, 58, 0.05);
+  --shadow-pop: 0 12px 40px rgba(14, 29, 58, 0.25);
+
+  /* Typographie : polices du système (aucun téléchargement, rapide sur Android d'entrée de gamme) */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fs-body: 1rem; /* 16 px minimum */
+  --fs-small: 0.875rem;
+  --fs-h1: 1.5rem;
+  --fs-h2: 1.125rem;
+  --fs-price: 2.75rem;
+  --lh: 1.45;
+
+  /* Dimensions */
+  --tap: 44px; /* cible tactile minimale */
+  --sidebar-w: 248px;
+  --topbar-h: 60px;
+  --bottombar-h: 64px;
+  --banner-h: 40px;
+}

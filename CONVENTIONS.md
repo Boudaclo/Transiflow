@@ -1,0 +1,19 @@
+# Conventions
+- Un module n'importe un autre module que via son `index.ts` (vérifié par `npm run arch` en CI).
+- Toute table métier a `tenant_id` ; il vient du jeton, jamais du client. RLS PostgreSQL en seconde barrière.
+- Chaque route API déclare sa permission requise ; sans droit : 403 sans fuite de données.
+- Montants en FCFA : entiers, jamais de décimales.
+- Chaque fonctionnalité arrive avec ses tests ; une étape n'est terminée que si `lint`, `arch`, `test` et `build` passent.
+- Versions figées par `package-lock.json` ; mises à jour planifiées, pas au fil de l'eau.
+- Messages de commit courts, à l'impératif, en français.
+- Toute requête métier passe par `DbService.withTenant(tenantId, …)` (le tenantId vient du jeton). `withPlatform` est réservé aux actions du super-administrateur.
+- Toute route déclare `@Public()`, `@AuthenticatedOnly()` ou `@RequirePermissions(...)` ; sinon 403 par défaut (test automatique `routes.spec.ts`).
+- Toute nouvelle table métier : colonne `tenant_id`, `ENABLE ROW LEVEL SECURITY`, politique `tenant_isolation`, `GRANT` explicite à `transport_app`, et un test d'isolation.
+- Actions sensibles : écrire dans `audit_logs` dans la même transaction que l'action.
+- Tables liées entre elles : clés étrangères **composites** incluant `tenant_id` (ex. `(tenant_id, line_id) → lines`), pour qu'une ligne ne puisse jamais référencer un objet d'une autre compagnie, même hors RLS.
+- Pas de suppression physique des données métier (lignes, tarifs, départs, clients) : désactivation ou statut ; l'utilisateur applicatif n'a pas le droit DELETE.
+- Un module n'accède jamais aux tables d'un autre : il appelle ses services publics (méthodes prenant un `PoolClient` pour rester dans la même transaction, ex. `TripsService.lockForSale`, `LignesService.findActiveFare`).
+- Le prix d'un billet est toujours calculé par le serveur ; le poste n'envoie jamais de montant.
+- Hors ligne : une vente faite hors ligne est un fait. Le serveur la vérifie (signature du poste, plage de numéros) puis l'enregistre ; les écarts sont des anomalies, jamais des refus silencieux. Seules les ventes falsifiées sont rejetées, avec leur raison.
+- Toute synchronisation doit pouvoir être rejouée sans effet (identifiants générés par l'appareil, contraintes d'unicité côté base).
+- Les heures envoyées par un appareil sont corrigées du décalage d'horloge (`deviceNow` contre l'heure du serveur) ; ne jamais faire confiance à l'horloge brute d'un appareil.

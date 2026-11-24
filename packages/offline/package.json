@@ -1,0 +1,9 @@
+{
+  "name": "@transport/offline",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": { "build": "tsc -p tsconfig.json" },
+  "dependencies": { "@noble/ed25519": "1.7.3", "@transport/shared": "*" }
+}
